@@ -34,7 +34,14 @@ class DoCatchTryThrowsBootcampDataManager {
             throw URLError(.backgroundSessionWasDisconnected)
         }
     }
-    
+    /*
+    func getTitle4() throws -> String {
+        if isActive {
+            return "New Text4!"
+        } else {
+            throw URLError(.backgroundSessionWasDisconnected)
+        }
+    }*/
 }
 
 class DoCatchTryThrowsBootcampViewModel: ObservableObject {
@@ -61,11 +68,19 @@ class DoCatchTryThrowsBootcampViewModel: ObservableObject {
             text = error.localizedDescription
         }
         */
+        /*
         do {
             let newTitle = try manager.getTitle3()
             text = newTitle
-        } catch let error {
+            
+            let finalTitle = try manager.getTitle4()
+            text = finalTitle
+        } catch {
             text = error.localizedDescription
+        }
+        */
+        if let newTitle = try? manager.getTitle3() {
+            text = newTitle
         }
     }
 }
