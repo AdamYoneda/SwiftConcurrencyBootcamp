@@ -19,6 +19,14 @@ class DoCatchTryThrowsBootcampDataManager {
         }
     }
     
+    func getTitle2() -> Result<String, Error> {
+        if isActive {
+            return .success("New Text2!")
+        } else {
+            return .failure(URLError(.appTransportSecurityRequiresSecureConnection))
+        }
+    }
+    
 }
 
 class DoCatchTryThrowsBootcampViewModel: ObservableObject {
@@ -27,10 +35,21 @@ class DoCatchTryThrowsBootcampViewModel: ObservableObject {
     let manager = DoCatchTryThrowsBootcampDataManager()
     
     func fetchTitle() {
+        /*
         let returnedValue = manager.getTitle()
         if let newTitle = returnedValue.title {
             text = newTitle
         } else if let error = returnedValue.error {
+            text = error.localizedDescription
+        }
+         */
+        
+        let result = manager.getTitle2()
+        
+        switch result {
+        case .success(let newTitle):
+            text = newTitle
+        case .failure(let error):
             text = error.localizedDescription
         }
     }
