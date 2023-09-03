@@ -11,11 +11,11 @@ class DoCatchTryThrowsBootcampDataManager {
     
     let isActive: Bool = false
     
-    func getTitle() -> String? {
+    func getTitle() -> (title:String?, error: Error?) {
         if isActive {
-            return "New Text!"
+            return ("New Text!", nil)
         } else {
-            return nil
+            return (nil, URLError(.badURL))
         }
     }
     
@@ -27,8 +27,11 @@ class DoCatchTryThrowsBootcampViewModel: ObservableObject {
     let manager = DoCatchTryThrowsBootcampDataManager()
     
     func fetchTitle() {
-        if let newTitle = manager.getTitle() {
+        let returnedValue = manager.getTitle()
+        if let newTitle = returnedValue.title {
             text = newTitle
+        } else if let error = returnedValue.error {
+            text = error.localizedDescription
         }
     }
 }
