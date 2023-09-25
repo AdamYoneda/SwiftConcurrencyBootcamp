@@ -37,6 +37,16 @@ class DownloadImageAsyncImageLoader {
             .mapError({ $0 })
             .eraseToAnyPublisher()
     }
+    
+    func downloadWithAsync() async throws -> UIImage? {
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
+            let image = handleResponse(data: data, response: response)
+            return image
+        } catch {
+            throw error
+        }
+    }
 }
 
 
@@ -46,7 +56,7 @@ class DownloadImageAsyncViewModel: ObservableObject {
     let loader = DownloadImageAsyncImageLoader()
     var cancellables = Set<AnyCancellable>()
     
-    func fetchImage() {
+    func fetchImage() async {
         /*
          loader.downloadWithEscaping { [weak self] image, error in
          DispatchQueue.main.async {
@@ -54,6 +64,7 @@ class DownloadImageAsyncViewModel: ObservableObject {
          }
          }
          */
+        /*
         loader.downloadWithCombine()
             .receive(on: DispatchQueue.main)
             .sink { _ in
@@ -62,6 +73,11 @@ class DownloadImageAsyncViewModel: ObservableObject {
                 self?.image = image
             }
             .store(in: &cancellables)
+        */
+        let image = try? await loader.downloadWithAsync()
+        await MainActor.run {
+            self.image = image
+        }
     }
 }
 
@@ -79,7 +95,9 @@ struct DownloadImageAsync: View {
             }
         }
         .onAppear {
-            viewModel.fetchImage()
+            Task {
+                await viewModel.fetchImage()
+            }
         }
     }
 }
