@@ -14,6 +14,7 @@
 		9B91DBCD2A9CA387006AFDE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B91DBCC2A9CA387006AFDE4 /* ContentView.swift */; };
 		9B91DBCF2A9CA38E006AFDE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B91DBCE2A9CA38E006AFDE4 /* Assets.xcassets */; };
 		9B91DBD22A9CA38E006AFDE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B91DBD12A9CA38E006AFDE4 /* Preview Assets.xcassets */; };
+		9BFA48E62B0F537F00406A53 /* TaskBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFA48E52B0F537F00406A53 /* TaskBootcamp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		9B91DBCC2A9CA387006AFDE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9B91DBCE2A9CA38E006AFDE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B91DBD12A9CA38E006AFDE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9BFA48E52B0F537F00406A53 /* TaskBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskBootcamp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				9B34BA862AA4FF8C00607D6B /* DoCatchTryThrowsBootcamp.swift */,
 				9B8D6B242AB842EF00B5FAAE /* DownloadImageAsync.swift */,
 				9B52D3D32AC1867B0031C67A /* AsyncAwaitBootcamp.swift */,
+				9BFA48E52B0F537F00406A53 /* TaskBootcamp.swift */,
 				9B91DBCE2A9CA38E006AFDE4 /* Assets.xcassets */,
 				9B91DBD02A9CA38E006AFDE4 /* Preview Content */,
 			);
@@ -149,6 +152,7 @@
 				9B8D6B252AB842EF00B5FAAE /* DownloadImageAsync.swift in Sources */,
 				9B34BA872AA4FF8C00607D6B /* DoCatchTryThrowsBootcamp.swift in Sources */,
 				9B91DBCD2A9CA387006AFDE4 /* ContentView.swift in Sources */,
+				9BFA48E62B0F537F00406A53 /* TaskBootcamp.swift in Sources */,
 				9B52D3D42AC1867B0031C67A /* AsyncAwaitBootcamp.swift in Sources */,
 				9B91DBCB2A9CA387006AFDE4 /* SwiftConcurrencyBootcampApp.swift in Sources */,
 			);
