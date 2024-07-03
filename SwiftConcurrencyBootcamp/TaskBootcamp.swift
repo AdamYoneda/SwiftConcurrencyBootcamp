@@ -55,8 +55,13 @@ struct TaskBootcamp: View {
             }
         })
         .onAppear(perform: {
+            // Task同士は同期的に呼び出される
             Task {
+                // Task内は非同期
                 await viewModel.fetchImage()
+            }
+            Task {
+                // Task内は非同期
                 await viewModel.fetchImage2()
             }
         })
