@@ -57,10 +57,16 @@ struct TaskBootcamp: View {
         .onAppear(perform: {
             // Task同士は同期的に呼び出される
             Task {
+                // ThreadとPriorityを確認
+                print(Thread.current)
+                print(Task.currentPriority.rawValue)
                 // Task内は非同期
                 await viewModel.fetchImage()
             }
             Task {
+                // ThreadとPriorityを確認
+                print(Thread.current)
+                print(Task.currentPriority.rawValue)
                 // Task内は非同期
                 await viewModel.fetchImage2()
             }
