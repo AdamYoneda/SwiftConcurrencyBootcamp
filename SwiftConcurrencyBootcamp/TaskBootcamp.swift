@@ -13,7 +13,7 @@ class TaskBootcampViewModel: ObservableObject {
     
     func fetchImage() async {
         do {
-            guard let url = URL(string: "https://picsum.photos/200") else { return }
+            guard let url = URL(string: "https://picsum.photos/1000") else { return }
             let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
             
             self.image = UIImage(data: data)
@@ -28,7 +28,19 @@ struct TaskBootcamp: View {
     @StateObject private var viewModel = TaskBootcampViewModel()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 40, content: {
+            if let image = viewModel.image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+            }
+        })
+        .onAppear(perform: {
+            Task {
+                await viewModel.fetchImage()
+            }
+        })
     }
 }
 
