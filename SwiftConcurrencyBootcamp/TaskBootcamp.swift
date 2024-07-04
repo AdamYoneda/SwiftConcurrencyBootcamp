@@ -56,40 +56,49 @@ struct TaskBootcamp: View {
         })
         .onAppear(perform: {
             /*
-            // Task同士は同期的に呼び出される
-            Task {
-                // ThreadとPriorityを確認
-                print(Thread.current)
-                print(Task.currentPriority.rawValue)
-                // Task内は非同期
-                await viewModel.fetchImage()
-            }
-            Task {
-                // ThreadとPriorityを確認
-                print(Thread.current)
-                print(Task.currentPriority.rawValue)
-                // Task内は非同期
-                await viewModel.fetchImage2()
-            }
-            */
+             // Task同士は同期的に呼び出される
+             Task {
+             // ThreadとPriorityを確認
+             print(Thread.current)
+             print(Task.currentPriority.rawValue)
+             // Task内は非同期
+             await viewModel.fetchImage()
+             }
+             Task {
+             // ThreadとPriorityを確認
+             print(Thread.current)
+             print(Task.currentPriority.rawValue)
+             // Task内は非同期
+             await viewModel.fetchImage2()
+             }
+             */
+            /*
+             Task(priority: .low) {
+             print("low :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+             }
+             Task(priority: .medium) {
+             print("medium :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+             }
+             Task(priority: .high) {
+             print("high :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+             }
+             Task(priority: .background) {
+             print("background :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+             }
+             Task(priority: .utility) {
+             print("utility :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+             }
+             Task(priority: .userInitiated) {
+             print("userInitiated :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+             }
+             */
             /*
             Task(priority: .low) {
-                print("low :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
-            }
-            Task(priority: .medium) {
-                print("medium :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
-            }
-            Task(priority: .high) {
-                print("high :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
-            }
-            Task(priority: .background) {
-                print("background :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
-            }
-            Task(priority: .utility) {
-                print("utility :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
-            }
-            Task(priority: .userInitiated) {
-                print("userInitiated :\n \(Task.currentPriority.rawValue) : \(Thread.current)")
+                print("low : \(Thread.current) : \(Task.currentPriority.rawValue)")
+                
+                Task.detached {
+                    print("detached : \(Thread.current) : \(Task.currentPriority.rawValue)")
+                }
             }
             */
         })
