@@ -72,6 +72,7 @@ struct TaskBootcampHomeView: View {
 struct TaskBootcamp: View {
     
     @StateObject private var viewModel = TaskBootcampViewModel()
+//    @State private var fetchImageTask: Task<(), Never>? = nil
     
     var body: some View {
         VStack(spacing: 40, content: {
@@ -87,6 +88,13 @@ struct TaskBootcamp: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
             }
+        })
+        .task {
+            await viewModel.fetchImageWithSleep()
+        }
+        /*
+        .onDisappear(perform: {
+            fetchImageTask?.cancel()
         })
         .onAppear(perform: {
             /*
@@ -136,10 +144,11 @@ struct TaskBootcamp: View {
             }
             */
             
-            Task {
+            fetchImageTask = Task {
                 await viewModel.fetchImageWithSleep()
             }
         })
+        */
     }
 }
 
