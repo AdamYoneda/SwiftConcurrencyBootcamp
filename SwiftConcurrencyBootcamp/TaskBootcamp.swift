@@ -17,7 +17,9 @@ class TaskBootcampViewModel: ObservableObject {
             guard let url = URL(string: "https://picsum.photos/1000") else { return }
             let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
             
-            self.image = UIImage(data: data)
+            await MainActor.run {
+                self.image = UIImage(data: data)
+            }
         } catch {
             print(#function, error.localizedDescription)
         }
@@ -28,9 +30,41 @@ class TaskBootcampViewModel: ObservableObject {
             guard let url = URL(string: "https://picsum.photos/1000") else { return }
             let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
             
-            self.image2 = UIImage(data: data)
+            await MainActor.run {
+                self.image2 = UIImage(data: data)
+            }
         } catch {
             print(#function, error.localizedDescription)
+        }
+    }
+    
+    // fetchImage()に5秒遅延を入れただけ
+    func fetchImageWithSleep() async {
+        do {
+            // 5sec delay
+            try await Task.sleep(nanoseconds: 5_000_000_000)
+            
+            guard let url = URL(string: "https://picsum.photos/1000") else { return }
+            let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
+            
+            await MainActor.run {
+                self.image = UIImage(data: data)
+                print("--- Image returned successfully ---")
+            }
+        } catch {
+            print(#function, error.localizedDescription)
+        }
+    }
+}
+
+struct TaskBootcampHomeView: View {
+    var body: some View {
+        NavigationStack {
+            ZStack(content: {
+                NavigationLink("CLICK ME! 😎😎😎") {
+                    TaskBootcamp()
+                }
+            })
         }
     }
 }
@@ -101,6 +135,10 @@ struct TaskBootcamp: View {
                 }
             }
             */
+            
+            Task {
+                await viewModel.fetchImageWithSleep()
+            }
         })
     }
 }
