@@ -27,6 +27,7 @@ struct AsyncLetBootcamp: View {
             }
             .navigationTitle("Async Let 🥳")
             .onAppear(perform: {
+                /*
                 Task {
                     do {
                         // fetchImageを複数回呼び出す
@@ -43,6 +44,8 @@ struct AsyncLetBootcamp: View {
                         print(error.localizedDescription)
                     }
                 }
+                */
+                
             })
         })
     }
