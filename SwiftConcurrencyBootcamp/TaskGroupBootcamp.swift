@@ -7,8 +7,52 @@
 
 import SwiftUI
 
+class TaskGroupBootcampDataManager {
+    
+    func fetchImagesWithAsyncLet() async throws -> [UIImage] {
+        let urlString = "https://picsum.photos/1000"
+        // async letを用いて、各タスクを並行に実行する
+        async let fetchImage1 = fetchImage(urlString: urlString)
+        async let fetchImage2 = fetchImage(urlString: urlString)
+        async let fetchImage3 = fetchImage(urlString: urlString)
+        async let fetchImage4 = fetchImage(urlString: urlString)
+        
+        do {
+            let images = await [try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4]
+            return images
+        } catch {
+            throw error
+        }
+    }
+    
+    // AsyncLetBootcamp.swiftから引用
+    // DataManager内でのみ呼ぶようにprivate化
+    private func fetchImage(urlString: String) async throws -> UIImage {
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
+        }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let image = UIImage(data: data) {
+                return image
+            } else {
+                throw URLError(.badURL)
+            }
+        } catch {
+            throw error
+        }
+    }
+}
+
 class TaskGroupBootcampViewModel: ObservableObject {
     @Published var images: [UIImage] = []
+    let manager = TaskGroupBootcampDataManager() // 後でDIする
+    
+    func getImages() async {
+        if let images = try? await manager.fetchImagesWithAsyncLet() {
+            self.images.append(contentsOf: images)
+        }
+    }
 }
 
 struct TaskGroupBootcamp: View {
@@ -29,6 +73,9 @@ struct TaskGroupBootcamp: View {
                 })
             }
             .navigationTitle("Task Group 🙄")
+            .task {
+                await viewModel.getImages()
+            }
         })
     }
 }
