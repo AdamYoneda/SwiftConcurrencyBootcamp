@@ -23,6 +23,34 @@ class TaskGroupBootcampDataManager {
         return images
     }
     
+    // 画像〜5枚程度までならasync letで全然対応できたが、~20枚、~50枚となると対応が難しくなる
+    // そこでTask Groupを利用する
+    /// Task Groupを用いて、各タスクを並行に実行する
+    func fetchImagesWithTaskGroup() async throws -> [UIImage] {
+        return try await withThrowingTaskGroup(of: UIImage.self) { group in
+            var images: [UIImage] = []
+            // タスクの追加
+            group.addTask(priority: nil) {
+                return try await self.fetchImage(urlString: self.urlString)
+            }
+            group.addTask(priority: nil) {
+                return try await self.fetchImage(urlString: self.urlString)
+            }
+            group.addTask(priority: nil) {
+                return try await self.fetchImage(urlString: self.urlString)
+            }
+            group.addTask(priority: nil) {
+                return try await self.fetchImage(urlString: self.urlString)
+            }
+            
+            for try await image in group {
+                images.append(image)
+            }
+            
+            return images
+        }
+    }
+    
     // AsyncLetBootcamp.swiftから引用
     // DataManager内でのみ呼ぶようにprivate化
     private func fetchImage(urlString: String) async throws -> UIImage {
@@ -47,7 +75,7 @@ class TaskGroupBootcampViewModel: ObservableObject {
     let manager = TaskGroupBootcampDataManager() // 後でDIする
     
     func getImages() async {
-        if let images = try? await manager.fetchImagesWithAsyncLet() {
+        if let images = try? await manager.fetchImagesWithTaskGroup() {
             self.images.append(contentsOf: images)
         }
     }
