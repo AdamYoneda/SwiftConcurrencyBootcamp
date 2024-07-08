@@ -9,22 +9,18 @@ import SwiftUI
 
 class TaskGroupBootcampDataManager {
     
+    private let urlString = "https://picsum.photos/1000"
+    
     // 画像〜5枚程度までならasync letで全然対応できる
     /// async letを用いて、各タスクを並行に実行する
     func fetchImagesWithAsyncLet() async throws -> [UIImage] {
-        let urlString = "https://picsum.photos/1000"
-        
         async let fetchImage1 = fetchImage(urlString: urlString)
         async let fetchImage2 = fetchImage(urlString: urlString)
         async let fetchImage3 = fetchImage(urlString: urlString)
         async let fetchImage4 = fetchImage(urlString: urlString)
         
-        do {
-            let images = await [try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4]
-            return images
-        } catch {
-            throw error
-        }
+        let images = await [try fetchImage1, try fetchImage2, try fetchImage3, try fetchImage4]
+        return images
     }
     
     // AsyncLetBootcamp.swiftから引用
