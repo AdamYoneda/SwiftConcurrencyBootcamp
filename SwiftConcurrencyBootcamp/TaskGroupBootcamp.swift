@@ -27,20 +27,16 @@ class TaskGroupBootcampDataManager {
     // そこでTask Groupを利用する
     /// Task Groupを用いて、各タスクを並行に実行する
     func fetchImagesWithTaskGroup() async throws -> [UIImage] {
+        // fetchに使用するURL(試しに5個)
+        let imageUrlStrings = [urlString, urlString, urlString, urlString, urlString]
+        
         return try await withThrowingTaskGroup(of: UIImage.self) { group in
             var images: [UIImage] = []
             // タスクの追加
-            group.addTask(priority: nil) {
-                return try await self.fetchImage(urlString: self.urlString)
-            }
-            group.addTask(priority: nil) {
-                return try await self.fetchImage(urlString: self.urlString)
-            }
-            group.addTask(priority: nil) {
-                return try await self.fetchImage(urlString: self.urlString)
-            }
-            group.addTask(priority: nil) {
-                return try await self.fetchImage(urlString: self.urlString)
+            for imageUrlString in imageUrlStrings {
+                group.addTask {
+                    return try await self.fetchImage(urlString: imageUrlString)
+                }
             }
             
             for try await image in group {
