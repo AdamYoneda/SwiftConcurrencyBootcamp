@@ -30,18 +30,20 @@ class TaskGroupBootcampDataManager {
         // fetchに使用するURL(試しに5個)
         let imageUrlStrings = [urlString, urlString, urlString, urlString, urlString]
         
-        return try await withThrowingTaskGroup(of: UIImage.self) { group in
+        return try await withThrowingTaskGroup(of: UIImage?.self) { group in
             var images: [UIImage] = []
             images.reserveCapacity(imageUrlStrings.count)
             // タスクの追加
             for imageUrlString in imageUrlStrings {
                 group.addTask {
-                    return try await self.fetchImage(urlString: imageUrlString)
+                    return try? await self.fetchImage(urlString: imageUrlString)
                 }
             }
             
             for try await image in group {
-                images.append(image)
+                if let image {
+                    images.append(image)
+                }
             }
             
             return images
