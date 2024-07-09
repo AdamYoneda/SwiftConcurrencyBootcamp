@@ -32,6 +32,7 @@ class TaskGroupBootcampDataManager {
         
         return try await withThrowingTaskGroup(of: UIImage.self) { group in
             var images: [UIImage] = []
+            images.reserveCapacity(imageUrlStrings.count)
             // タスクの追加
             for imageUrlString in imageUrlStrings {
                 group.addTask {
