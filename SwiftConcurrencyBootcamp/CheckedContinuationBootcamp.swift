@@ -34,8 +34,6 @@ class CheckedContinuationBootcampViewModel: ObservableObject {
                 await MainActor.run {
                     self.image = image
                 }
-            } else {
-                print("-------")
             }
         } catch {
             print(#function, error)
