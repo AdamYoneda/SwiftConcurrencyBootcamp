@@ -32,6 +32,7 @@ class CheckedContinuationBootcampNetworkManager {
                     continuation.resume(throwing: URLError(.badURL))
                 }
             }
+            .resume()
         }
     }
 }
