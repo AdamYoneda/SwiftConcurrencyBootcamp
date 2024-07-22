@@ -19,6 +19,12 @@ class CheckedContinuationBootcampNetworkManager {
         }
     }
     
+    // Async/Awaitに対応していないフレームワーク・SDKを想定
+    func getData2(url: URL) async throws -> Data {
+        // Async/Awaitに対応していないSDKであるdataTask(with:completionHandler:)を使用
+        URLSession.shared.dataTask(with: <#T##URLRequest#>, completionHandler: <#T##(Data?, URLResponse?, (any Error)?) -> Void#>)
+        
+    }
 }
 
 class CheckedContinuationBootcampViewModel: ObservableObject {
