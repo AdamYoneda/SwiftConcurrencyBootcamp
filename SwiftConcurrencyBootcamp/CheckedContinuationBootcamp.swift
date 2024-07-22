@@ -11,6 +11,7 @@ class CheckedContinuationBootcampNetworkManager {
     
     func getData(url: URL) async throws -> Data {
         do {
+            // URLSession.shared.data(from:, delegate:)はAsync/Awaitに対応しているのでそのまま使用
             let (data, _) = try await URLSession.shared.data(from: url, delegate: nil)
             return data
         } catch {
