@@ -26,6 +26,10 @@ class CheckedContinuationBootcampNetworkManager {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data {
                     continuation.resume(returning: data)
+                } else if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(throwing: URLError(.badURL))
                 }
             }
         }
