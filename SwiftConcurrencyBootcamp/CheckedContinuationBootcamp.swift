@@ -45,7 +45,7 @@ class CheckedContinuationBootcampViewModel: ObservableObject {
     func getImage() async {
         guard let url = URL(string: "https://picsum.photos/300") else { return }
         do {
-            let data = try await networkManager.getData(url: url)
+            let data = try await networkManager.getData2(url: url)
             
             if let image = UIImage(data: data) {
                 await MainActor.run {
