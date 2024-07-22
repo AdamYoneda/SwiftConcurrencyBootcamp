@@ -24,7 +24,9 @@ class CheckedContinuationBootcampNetworkManager {
         return try await withCheckedThrowingContinuation { continuation in
             // Async/Awaitに対応していないSDKであるdataTask(with:completionHandler:)を使用
             URLSession.shared.dataTask(with: url) { data, response, error in
-                <#code#>
+                if let data {
+                    continuation.resume(returning: data)
+                }
             }
         }
     }
