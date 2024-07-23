@@ -35,6 +35,12 @@ class CheckedContinuationBootcampNetworkManager {
             .resume()
         }
     }
+    
+    func getHeartImageFromDatabase(completionHandler: @escaping(_ image: UIImage) -> ()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            completionHandler(UIImage(systemName: "heart.fill")!)
+        }
+    }
 }
 
 class CheckedContinuationBootcampViewModel: ObservableObject {
@@ -56,6 +62,13 @@ class CheckedContinuationBootcampViewModel: ObservableObject {
             print(#function, error)
         }
     }
+    
+    func getHeartImage() {
+        networkManager.getHeartImageFromDatabase { [weak self] image in
+            guard let self else { return }
+            self.image = image
+        }
+    }
 }
 
 struct CheckedContinuationBootcamp: View {
@@ -72,7 +85,8 @@ struct CheckedContinuationBootcamp: View {
             }
         }
         .task {
-            await viewModel.getImage()
+//            await viewModel.getImage()
+            viewModel.getHeartImage()
         }
     }
 }
