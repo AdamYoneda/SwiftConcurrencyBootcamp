@@ -77,6 +77,22 @@ struct MyStruct {
 // Immutable struct
 struct CustomStruct {
     let title: String
+    
+    func updateTitle(newTitle: String) -> CustomStruct {
+        return CustomStruct(title: newTitle)
+    }
+}
+
+struct MutatingStruct {
+    private(set) var title: String // (set)をつけるとprivateな値も取得できる
+    
+    init(title: String) {
+        self.title = title
+    }
+    
+    mutating func updateTitle(newTitle: String) {
+        self.title = newTitle
+    }
 }
 
 extension StructClassActorBootcamp {
@@ -88,10 +104,20 @@ extension StructClassActorBootcamp {
         print("Struct1: \(struct1.title)")
         struct1.title = "Title2"
         print("Struct1: \(struct1.title)")
-        
+        /*
         var struct2 = CustomStruct(title: "Title1")
         print("Struct2: \(struct2.title)")
         struct2 = CustomStruct(title: "Title2") // ここで上書き
         print("Struct2: \(struct2.title)")
+        
+        var struct3 = CustomStruct(title: "Title1")
+        print("Struct3: \(struct3.title)")
+        struct3 = struct3.updateTitle(newTitle: "Title2") // ここで上書き
+        print("Struct3: \(struct3.title)")
+        */
+        var struct4 = MutatingStruct(title: "Title1")
+        print("Struct4: \(struct4.title)")
+        struct4.updateTitle(newTitle: "Title2") // ここで上書き
+        print("Struct4: \(struct4.title)")
     }
 }
