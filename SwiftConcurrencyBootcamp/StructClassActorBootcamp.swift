@@ -20,21 +20,14 @@ struct StructClassActorBootcamp: View {
     StructClassActorBootcamp()
 }
 
-class MyClass {
-    var title: String
-    
-    init(title: String) {
-        self.title = title
-    }
-}
-
 extension StructClassActorBootcamp {
     
     private func runTest() {
         print("//* Test Started *//")
         //        structTest1()
         //        classTest1()
-        structTest2()
+        //        structTest2()
+        classTest2()
     }
     
     private func structTest1() {
@@ -68,6 +61,7 @@ extension StructClassActorBootcamp {
     }
 }
 
+// MARK: - Struct
 // プロパティを変数で定義
 struct MyStruct {
     var title: String
@@ -104,7 +98,7 @@ extension StructClassActorBootcamp {
         print("Struct1: \(struct1.title)")
         struct1.title = "Title2"
         print("Struct1: \(struct1.title)")
-        /*
+        
         var struct2 = CustomStruct(title: "Title1")
         print("Struct2: \(struct2.title)")
         struct2 = CustomStruct(title: "Title2") // ここで上書き
@@ -114,10 +108,31 @@ extension StructClassActorBootcamp {
         print("Struct3: \(struct3.title)")
         struct3 = struct3.updateTitle(newTitle: "Title2") // ここで上書き
         print("Struct3: \(struct3.title)")
-        */
+        
         var struct4 = MutatingStruct(title: "Title1")
         print("Struct4: \(struct4.title)")
         struct4.updateTitle(newTitle: "Title2") // ここで上書き
         print("Struct4: \(struct4.title)")
+    }
+}
+
+// MARK: - Class
+class MyClass {
+    var title: String
+    
+    init(title: String) {
+        self.title = title
+    }
+}
+
+extension StructClassActorBootcamp {
+    
+    private func classTest2() {
+        print(#function)
+        
+        let class1 = MyClass(title: "Title1")
+        print("Class1: \(class1.title)")
+        class1.title = "Title2"
+        print("Class1: \(class1.title)")
     }
 }
