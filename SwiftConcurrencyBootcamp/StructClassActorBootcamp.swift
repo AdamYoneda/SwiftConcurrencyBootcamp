@@ -123,6 +123,10 @@ class MyClass {
     init(title: String) {
         self.title = title
     }
+    
+    func updateTitle(newTitle: String) {
+        self.title = newTitle
+    }
 }
 
 extension StructClassActorBootcamp {
@@ -134,5 +138,10 @@ extension StructClassActorBootcamp {
         print("Class1: \(class1.title)")
         class1.title = "Title2"
         print("Class1: \(class1.title)")
+        
+        let class2 = MyClass(title: "Title1")
+        print("Class1: \(class2.title)")
+        class2.updateTitle(newTitle: "Title2")
+        print("Class1: \(class2.title)")
     }
 }
