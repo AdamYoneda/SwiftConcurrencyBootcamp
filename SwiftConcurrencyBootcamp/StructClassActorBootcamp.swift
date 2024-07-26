@@ -25,9 +25,11 @@ extension StructClassActorBootcamp {
     private func runTest() {
         print("//* Test Started *//")
         //        structTest1()
-        //        classTest1()
+        classTest1()
         //        structTest2()
-        classTest2()
+        //        classTest2()
+        print("================================")
+        actorTest1()
     }
     
     private func structTest1() {
@@ -35,21 +37,6 @@ extension StructClassActorBootcamp {
         print("ObjectA: \(objectA.title)")
         
         var objectB = objectA
-        print("ObjectB: \(objectB.title)")
-        
-        // titleを変更
-        objectB.title = "Second title!!"
-        print("---- ObjectB title Changed ---")
-        
-        print("ObjectA: \(objectA.title)")
-        print("ObjectB: \(objectB.title)")
-    }
-    
-    private func classTest1() {
-        let objectA = MyClass(title: "Starting title!")
-        print("ObjectA: \(objectA.title)")
-        
-        let objectB = objectA
         print("ObjectB: \(objectB.title)")
         
         // titleを変更
@@ -116,7 +103,7 @@ extension StructClassActorBootcamp {
     }
 }
 
-// MARK: - Class
+// MARK: - Class vs Actor
 class MyClass {
     var title: String
     
@@ -129,7 +116,56 @@ class MyClass {
     }
 }
 
+actor MyActor {
+    var title: String
+    
+    init(title: String) {
+        self.title = title
+    }
+    
+    func updateTitle(newTitle: String) {
+        self.title = newTitle
+    }
+}
+
 extension StructClassActorBootcamp {
+    
+    private func classTest1() {
+        print(#function)
+        let objectA = MyClass(title: "Starting title!")
+        print("ObjectA: \(objectA.title)")
+        
+        let objectB = objectA
+        print("ObjectB: \(objectB.title)")
+        
+        // titleを変更
+        objectB.title = "Second title!!"
+        print("---- ObjectB title Changed ---")
+        
+        print("ObjectA: \(objectA.title)")
+        print("ObjectB: \(objectB.title)")
+    }
+    
+    
+    
+    private func actorTest1() {
+        print(#function)
+        // Task{}でasync環境に
+        Task {
+            let objectA = MyActor(title: "Starting title!")
+            await print("ObjectA: \(objectA.title)")
+            
+            let objectB = objectA
+            await print("ObjectB: \(objectB.title)")
+            
+            // titleを変更
+            await objectB.updateTitle(newTitle: "Second title!!")
+            print("---- ObjectB title Changed ---")
+            
+            await print("ObjectA: \(objectA.title)")
+            await print("ObjectB: \(objectB.title)")
+        }
+    }
     
     private func classTest2() {
         print(#function)
