@@ -5,6 +5,20 @@
 //  Created by Adam Yoneda on 2024/07/23.
 //
 
+/*
+ REF Links:
+ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbTFMOUFtY2tRcmNTNUFsc1Y5Q013Ti0zOFRhd3xBQ3Jtc0tsN3FWNVhlRzRyR2RKcGNMRkx1cE5vTFNabVVwUXZQRGRtNkxMdGxEMmxxTFR3V05HbEl0eG1rRUdyS3dLRGowak9RYTRmUkVPT2ZaVkVZUVpzY2lIWEp0VHl5X0NsdlNkclkzeTBEN3k2VTdoMDZRcw&q=https%3A%2F%2Fblog.onewayfirst.com%2Fios%2Fposts%2F2019-03-19-class-vs-struct%2F&v=-JLenSTKEcA
+ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqazNDVUl0RFFPYU4zQWpqenl2T0JGZXNFcGVLQXxBQ3Jtc0ttQUxNYzdtUWxyREtlallVb3RJTS1lUUd2TlpVMjZxcC1BdFNtc2FBbEtNZUdueXJ6UzBTSElzWEplRUNpOHFqS2MtbFZibVEwUFVwZ2luQWZ5VkxQWDFMTjgyOEVJQjQweU5BelNqZlNJNUZYWk9IRQ&q=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F24217586%2Fstructure-vs-class-in-swift-language&v=-JLenSTKEcA
+ https://medium.com/@vinayakkini/swift-basics-struct-vs-class-31b44ade28ae
+ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbkppbGNycGpKc1VlRjk5aDZNNnh3SS1yeGNSd3xBQ3Jtc0trWldzMVpKSFNoWEI2bkV4TEcySTU3ZWpJYlFmRGU4a2JWbmVQdHlnaVBZNGI2TERrYXdLLTB4eTJqWVNzYkh2Ml9ob1ZhX1hDUW5zNkZ4YlhxclRRd2ZkS0xNNlYxbkxCTlFmZ3Z0TWsxX01QZWZFMA&q=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F24217586%2Fstructure-vs-class-in-swift-language%2F59219141%2359219141&v=-JLenSTKEcA
+ https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbmM5T3hWMF9JZnZNVEUxSl9LMTIzVGVyMjcwZ3xBQ3Jtc0ttV19JV3JRRDljOEJEV1ZjLTFoNVNtdDlDY2ZBamFLNnF0TVVZX29wbkZBQzAtYjhRU2t1SDFfMVM1Ml9lQVV2Y1htUkdPTmpOcEREY2ttYWxnMGc3UkpsNXUxY1N2OW9TTDhiLXpaQ2twMEV0Q3ZLaw&q=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F27441456%2Fswift-stack-and-heap-understanding&v=-JLenSTKEcA
+ https://stackoverflow.com/questions/24232799/why-choose-struct-over-class/24232845
+ https://www.backblaze.com/blog/whats-the-diff-programs-processes-and-threads/
+ https://medium.com/doyeona/automatic-reference-counting-in-swift-arc-weak-strong-unowned-925f802c1b99
+ */
+
+
+
 import SwiftUI
 
 struct StructClassActorBootcamp: View {
