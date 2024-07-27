@@ -6,6 +6,7 @@
 //
 
 /*
+ 
  REF Links:
  https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbTFMOUFtY2tRcmNTNUFsc1Y5Q013Ti0zOFRhd3xBQ3Jtc0tsN3FWNVhlRzRyR2RKcGNMRkx1cE5vTFNabVVwUXZQRGRtNkxMdGxEMmxxTFR3V05HbEl0eG1rRUdyS3dLRGowak9RYTRmUkVPT2ZaVkVZUVpzY2lIWEp0VHl5X0NsdlNkclkzeTBEN3k2VTdoMDZRcw&q=https%3A%2F%2Fblog.onewayfirst.com%2Fios%2Fposts%2F2019-03-19-class-vs-struct%2F&v=-JLenSTKEcA
  https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqazNDVUl0RFFPYU4zQWpqenl2T0JGZXNFcGVLQXxBQ3Jtc0ttQUxNYzdtUWxyREtlallVb3RJTS1lUUd2TlpVMjZxcC1BdFNtc2FBbEtNZUdueXJ6UzBTSElzWEplRUNpOHFqS2MtbFZibVEwUFVwZ2luQWZ5VkxQWDFMTjgyOEVJQjQweU5BelNqZlNJNUZYWk9IRQ&q=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F24217586%2Fstructure-vs-class-in-swift-language&v=-JLenSTKEcA
@@ -15,6 +16,52 @@
  https://stackoverflow.com/questions/24232799/why-choose-struct-over-class/24232845
  https://www.backblaze.com/blog/whats-the-diff-programs-processes-and-threads/
  https://medium.com/doyeona/automatic-reference-counting-in-swift-arc-weak-strong-unowned-925f802c1b99
+ 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ VALUE TYPES:
+ - Struct, Enum, String, Int, etc.
+ - Stored in the Stack Memory
+ - Faster
+ - Thread Safe: 各ThreadにStackが存在している
+ - 値渡し: When you assign or pass value type a new copy of data is created.
+ 
+ REFERENCE TYPES:
+ - Class, Function, Actor
+ - Stored in the Heap Memory
+ - Slower, but synchronized
+ - NOT Thread Safe(by default)
+ - When you assign or pass reference type a new reference to original instance will be created(the address of instance is copied).
+ 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ STACK:
+ - Stores Value types
+ - Variables allocated on the stack are stored directly to the memory, and access to this memory is very fast.
+ - Each Thread has it's own stack
+ 
+ HEAP:
+ - Stores Reference types
+ - Shared across threads(スレッド間で共有)
+ 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ STRUCT:
+ - Based on Values
+ - Can be mutated
+ - Stored in the Stack
+ 
+ CLASS:
+ - Based on References(instanceとも呼ばれる)
+ - Stored in the Heap
+ - Inherit from other classes
+ 
+ ACTOR:
+ - Same as Class, but thread safe
+ 
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+ 
  */
 
 
