@@ -71,17 +71,51 @@
 
 import SwiftUI
 
+class StructClassActorViewModel: ObservableObject {
+    
+    @Published var title: String = ""
+    
+    init() {
+        print("ViewModel init")
+    }
+    
+}
+
 struct StructClassActorBootcamp: View {
+    
+    @StateObject private var viewModel = StructClassActorViewModel()
+    let isActive: Bool
+    
+    init(isActive: Bool) {
+        self.isActive = isActive
+        print("View init")
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Hello, World!")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea()
+            .background(isActive ? Color.red : Color.blue)
             .onAppear(perform: {
-                self.runTest()
+                //                self.runTest()
             })
     }
 }
 
+struct StructClassActorBootcampHomeView: View {
+    
+    @State private var isActive: Bool = false
+    
+    var body: some View {
+        StructClassActorBootcamp(isActive: isActive)
+            .onTapGesture {
+                isActive.toggle()
+            }
+    }
+}
+
 #Preview {
-    StructClassActorBootcamp()
+    StructClassActorBootcampHomeView()
 }
 
 extension StructClassActorBootcamp {
