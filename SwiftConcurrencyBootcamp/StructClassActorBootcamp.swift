@@ -61,6 +61,9 @@
  
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
+ Structs: Data Models, Views(SwiftUI)
+ Classes: ViewModel(ObservableObjectはclassである必要がある（SwiftUI）)
+ Actors: DataManagerやSharedなClass、Shared "Manager" and "Data Store"
  
  */
 
