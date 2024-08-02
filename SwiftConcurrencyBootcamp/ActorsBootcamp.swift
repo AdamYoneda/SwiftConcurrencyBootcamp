@@ -11,9 +11,35 @@ import SwiftUI
 // 2. How was this problem solved prior to actors?
 // 3. Actors can solve the problem!
 
+struct HomeView: View {
+    var body: some View {
+        ZStack {
+            Color.gray.opacity(0.8).ignoresSafeArea()
+        }
+    }
+}
+
+struct BrowseView: View {
+    var body: some View {
+        ZStack {
+            Color.yellow.opacity(0.8).ignoresSafeArea()
+        }
+    }
+}
+
 struct ActorsBootcamp: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+            
+            BrowseView()
+                .tabItem {
+                    Label("Browse", systemImage: "magnifyingglass")
+                }
+        }
     }
 }
 
