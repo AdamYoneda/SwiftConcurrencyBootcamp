@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B2406AD2C5CB4EB00F4870C /* ActorsBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2406AC2C5CB4EB00F4870C /* ActorsBootcamp.swift */; };
 		9B34BA872AA4FF8C00607D6B /* DoCatchTryThrowsBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B34BA862AA4FF8C00607D6B /* DoCatchTryThrowsBootcamp.swift */; };
 		9B52D3D42AC1867B0031C67A /* AsyncAwaitBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B52D3D32AC1867B0031C67A /* AsyncAwaitBootcamp.swift */; };
 		9B64CC382C37D6D8003BC533 /* AsyncLetBootcamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B64CC372C37D6D8003BC533 /* AsyncLetBootcamp.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B2406AC2C5CB4EB00F4870C /* ActorsBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorsBootcamp.swift; sourceTree = "<group>"; };
 		9B34BA862AA4FF8C00607D6B /* DoCatchTryThrowsBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoCatchTryThrowsBootcamp.swift; sourceTree = "<group>"; };
 		9B52D3D32AC1867B0031C67A /* AsyncAwaitBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncAwaitBootcamp.swift; sourceTree = "<group>"; };
 		9B64CC372C37D6D8003BC533 /* AsyncLetBootcamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncLetBootcamp.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				9B64CC392C3D229E003BC533 /* TaskGroupBootcamp.swift */,
 				9B8F53AB2C413AF700965703 /* CheckedContinuationBootcamp.swift */,
 				9B7E7BE32C4F99FC00A0184A /* StructClassActorBootcamp.swift */,
+				9B2406AC2C5CB4EB00F4870C /* ActorsBootcamp.swift */,
 				9B91DBCE2A9CA38E006AFDE4 /* Assets.xcassets */,
 				9B91DBD02A9CA38E006AFDE4 /* Preview Content */,
 			);
@@ -164,6 +167,7 @@
 				9B8D6B252AB842EF00B5FAAE /* DownloadImageAsync.swift in Sources */,
 				9B34BA872AA4FF8C00607D6B /* DoCatchTryThrowsBootcamp.swift in Sources */,
 				9B91DBCD2A9CA387006AFDE4 /* ContentView.swift in Sources */,
+				9B2406AD2C5CB4EB00F4870C /* ActorsBootcamp.swift in Sources */,
 				9B8F53AC2C413AF700965703 /* CheckedContinuationBootcamp.swift in Sources */,
 				9B7E7BE42C4F99FC00A0184A /* StructClassActorBootcamp.swift in Sources */,
 				9BFA48E62B0F537F00406A53 /* TaskBootcamp.swift in Sources */,
