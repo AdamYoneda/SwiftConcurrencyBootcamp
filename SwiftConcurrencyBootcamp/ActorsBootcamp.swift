@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+// 1. What is the problem that actor are solving?
+// 2. How was this problem solved prior to actors?
+// 3. Actors can solve the problem!
+
 struct ActorsBootcamp: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
