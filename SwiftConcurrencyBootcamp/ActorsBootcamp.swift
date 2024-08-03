@@ -40,8 +40,12 @@ struct HomeView: View {
                 .font(.headline)
         }
         .onReceive(timer, perform: { _ in
-            if let data = manager.getRandomData() {
-                self.text = data
+            DispatchQueue.global(qos: .background).async {
+                if let data = manager.getRandomData() {
+                    DispatchQueue.main.async {
+                        self.text = data
+                    }
+                }
             }
         })
     }
@@ -52,7 +56,7 @@ struct BrowseView: View {
     let manager = MyDataManager.instance
     @State private var text: String = ""
     // Viewが作られると自動的にスタートする
-    let timer = Timer.publish(every: 0.3, tolerance: nil, on: .main, in: .common, options: nil).autoconnect()
+    let timer = Timer.publish(every: 0.01, tolerance: nil, on: .main, in: .common, options: nil).autoconnect()
     
     var body: some View {
         ZStack {
@@ -62,8 +66,12 @@ struct BrowseView: View {
                 .font(.headline)
         }
         .onReceive(timer, perform: { _ in
-            if let data = manager.getRandomData() {
-                self.text = data
+            DispatchQueue.global(qos: .default).async {
+                if let data = manager.getRandomData() {
+                    DispatchQueue.main.async {
+                        self.text = data
+                    }
+                }
             }
         })
     }
