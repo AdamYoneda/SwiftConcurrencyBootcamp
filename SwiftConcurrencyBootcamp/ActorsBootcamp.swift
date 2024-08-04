@@ -17,10 +17,10 @@ class MyDataManager {
     private init() { }
     
     var data: [String] = []
-    private let queue = DispatchQueue(label: "com.MyApp.MyDataManager")
+    private let lock = DispatchQueue(label: "com.MyApp.MyDataManager")
     
     func getRandomData(completionHandler: @escaping (_ title: String?) -> Void) {
-        queue.async {
+        lock.async {
             self.data.append(UUID().uuidString)
             print(Thread.current)
             completionHandler(self.data.randomElement())
