@@ -44,9 +44,11 @@ struct HomeView: View {
         }
         .onReceive(timer, perform: { _ in
             DispatchQueue.global(qos: .background).async {
-                if let data = manager.getRandomData() {
-                    DispatchQueue.main.async {
-                        self.text = data
+                manager.getRandomData { title in
+                    if let data = title {
+                        DispatchQueue.main.async {
+                            self.text = data
+                        }
                     }
                 }
             }
@@ -70,9 +72,11 @@ struct BrowseView: View {
         }
         .onReceive(timer, perform: { _ in
             DispatchQueue.global(qos: .default).async {
-                if let data = manager.getRandomData() {
-                    DispatchQueue.main.async {
-                        self.text = data
+                manager.getRandomData { title in
+                    if let data = title {
+                        DispatchQueue.main.async {
+                            self.text = data
+                        }
                     }
                 }
             }
