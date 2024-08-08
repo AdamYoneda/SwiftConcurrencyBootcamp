@@ -37,11 +37,16 @@ actor MyActorDataManager {
     private init() { }
     
     var data: [String] = []
+    nonisolated let myRandomText = "gnegowejgiojweaioghjiowaoio"
     
     func getRandomData() -> String? {
         self.data.append(UUID().uuidString)
         print(Thread.current)
         return self.data.randomElement()
+    }
+    
+    nonisolated func getSavedData() -> String {
+        return "NEW String"
     }
 }
 
@@ -60,6 +65,10 @@ struct HomeView: View {
             Text(text)
                 .font(.headline)
         }
+        .onAppear(perform: {
+            let newString = manager.myRandomText
+            let newSavedString = manager.getSavedData()
+        })
         .onReceive(timer, perform: { _ in
             /*
             DispatchQueue.global(qos: .background).async {
