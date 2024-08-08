@@ -48,7 +48,7 @@ actor MyActorDataManager {
 
 struct HomeView: View {
     
-    let manager = MyDataManager.instance
+    let manager = MyActorDataManager.instance
     @State private var text: String = ""
     // Viewが作られると自動的にスタートする
     let timer = Timer.publish(every: 0.1, tolerance: nil, on: .main, in: .common, options: nil).autoconnect()
@@ -61,6 +61,7 @@ struct HomeView: View {
                 .font(.headline)
         }
         .onReceive(timer, perform: { _ in
+            /*
             DispatchQueue.global(qos: .background).async {
                 manager.getRandomData { title in
                     if let data = title {
@@ -70,13 +71,21 @@ struct HomeView: View {
                     }
                 }
             }
+            */
+            Task {
+                if let data = await manager.getRandomData() {
+                    await MainActor.run {
+                        self.text = data
+                    }
+                }
+            }
         })
     }
 }
 
 struct BrowseView: View {
     
-    let manager = MyDataManager.instance
+    let manager = MyActorDataManager.instance
     @State private var text: String = ""
     // Viewが作られると自動的にスタートする
     let timer = Timer.publish(every: 0.01, tolerance: nil, on: .main, in: .common, options: nil).autoconnect()
@@ -89,12 +98,21 @@ struct BrowseView: View {
                 .font(.headline)
         }
         .onReceive(timer, perform: { _ in
+            /*
             DispatchQueue.global(qos: .default).async {
                 manager.getRandomData { title in
                     if let data = title {
                         DispatchQueue.main.async {
                             self.text = data
                         }
+                    }
+                }
+            }
+            */
+            Task {
+                if let data = await manager.getRandomData() {
+                    await MainActor.run {
+                        self.text = data
                     }
                 }
             }
