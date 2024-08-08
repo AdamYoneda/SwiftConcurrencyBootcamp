@@ -11,6 +11,8 @@ import SwiftUI
 // 2. How was this problem solved prior to actors?
 // 3. Actors can solve the problem!
 
+
+// MARK: - Actor登場以前のスレッドセーフな手法
 class MyDataManager {
     // Singleton
     static let instance = MyDataManager()
@@ -27,6 +29,22 @@ class MyDataManager {
         }
     }
 }
+
+// MARK: - Actor登場後のスレッドセーフな手法
+actor MyActorDataManager {
+    // Singleton
+    static let instance = MyActorDataManager()
+    private init() { }
+    
+    var data: [String] = []
+    
+    func getRandomData() -> String? {
+        self.data.append(UUID().uuidString)
+        print(Thread.current)
+        return self.data.randomElement()
+    }
+}
+
 
 struct HomeView: View {
     
