@@ -23,7 +23,8 @@ class GlobalActorBootcampViewModel: ObservableObject {
     @Published var dataArray: [String] = []
     let manager = MyFirstGlobalActor.shared
     
-    @MyFirstGlobalActor 
+//    @MyFirstGlobalActor 
+    @MainActor
     func getData() async {
         let data = await manager.getDataFromDatabase()
         self.dataArray.append(contentsOf: data)
