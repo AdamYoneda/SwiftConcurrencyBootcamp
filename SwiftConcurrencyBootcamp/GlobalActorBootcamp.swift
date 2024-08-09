@@ -7,9 +7,31 @@
 
 import SwiftUI
 
+class GlobalActorBootcampViewModel: ObservableObject {
+    
+    @Published var dataArray: [String] = []
+    
+    func getData() async {
+        
+    }
+}
+
 struct GlobalActorBootcamp: View {
+    
+    @StateObject private var viewModel = GlobalActorBootcampViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack(content: {
+                ForEach(viewModel.dataArray, id: \.self) {
+                    Text($0)
+                        .font(.headline)
+                }
+            })
+        }
+        .task {
+            await viewModel.getData()
+        }
     }
 }
 
