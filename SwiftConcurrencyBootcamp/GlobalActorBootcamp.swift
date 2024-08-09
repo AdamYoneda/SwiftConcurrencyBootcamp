@@ -7,18 +7,23 @@
 
 import SwiftUI
 
+@globalActor struct MyFirstGlobalActor {
+    static var shared = MyNewDataManager()
+}
+
 actor MyNewDataManager {
     
     func getDataFromDatabase() -> [String] {
-        return ["One", "Two", "Three"]
+        return ["One", "Two", "Three", "Four", "Five", "Six"]
     }
 }
 
 class GlobalActorBootcampViewModel: ObservableObject {
     
     @Published var dataArray: [String] = []
-    let manager = MyNewDataManager()
+    let manager = MyFirstGlobalActor.shared
     
+    @MyFirstGlobalActor 
     func getData() async {
         let data = await manager.getDataFromDatabase()
         self.dataArray.append(contentsOf: data)
