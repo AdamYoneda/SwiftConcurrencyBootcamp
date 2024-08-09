@@ -7,12 +7,21 @@
 
 import SwiftUI
 
+actor MyNewDataManager {
+    
+    func getDataFromDatabase() -> [String] {
+        return ["One", "Two", "Three"]
+    }
+}
+
 class GlobalActorBootcampViewModel: ObservableObject {
     
     @Published var dataArray: [String] = []
+    let manager = MyNewDataManager()
     
     func getData() async {
-        
+        let data = await manager.getDataFromDatabase()
+        self.dataArray.append(contentsOf: data)
     }
 }
 
