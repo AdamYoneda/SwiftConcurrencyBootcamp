@@ -18,9 +18,9 @@ actor MyNewDataManager {
     }
 }
 
-class GlobalActorBootcampViewModel: ObservableObject {
+@MainActor class GlobalActorBootcampViewModel: ObservableObject {
     
-    @MainActor @Published var dataArray: [String] = []
+    @Published var dataArray: [String] = []
     let manager = MyFirstGlobalActor.shared
     
     @MyFirstGlobalActor
