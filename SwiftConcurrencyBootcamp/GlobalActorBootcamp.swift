@@ -20,14 +20,17 @@ actor MyNewDataManager {
 
 class GlobalActorBootcampViewModel: ObservableObject {
     
-    @Published var dataArray: [String] = []
+    @MainActor @Published var dataArray: [String] = []
     let manager = MyFirstGlobalActor.shared
     
-//    @MyFirstGlobalActor 
-    @MainActor
-    func getData() async {
-        let data = await manager.getDataFromDatabase()
-        self.dataArray.append(contentsOf: data)
+    @MyFirstGlobalActor
+    func getData() {
+        Task {
+            let data = await manager.getDataFromDatabase()
+            await MainActor.run {
+                self.dataArray.append(contentsOf: data)
+            }
+        }
     }
 }
 
@@ -45,7 +48,7 @@ struct GlobalActorBootcamp: View {
             })
         }
         .task {
-            await viewModel.getData()
+            await viewModel.getData() // Actorの関数なので、awaitが必須
         }
     }
 }
