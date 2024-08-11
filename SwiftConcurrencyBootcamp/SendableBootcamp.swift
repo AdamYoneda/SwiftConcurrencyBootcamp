@@ -9,9 +9,13 @@ import SwiftUI
 
 actor CurrentUserManager {
     
-    func updateDatabase(userInfo: String) {
-        
+    func updateDatabase(userInfo: MyUserInfo) {
+        print(#function)
     }
+}
+
+struct MyUserInfo {
+    let name: String
 }
 
 class SendableBootcampViewModel: ObservableObject {
@@ -20,7 +24,7 @@ class SendableBootcampViewModel: ObservableObject {
     
     func updateCurrentUserInfo() async {
         
-        let info: String = "USER INFO"
+        let info = MyUserInfo(name: "USER INFO")
         
         await manager.updateDatabase(userInfo: info)
     }
