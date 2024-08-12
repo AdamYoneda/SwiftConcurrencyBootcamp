@@ -18,8 +18,8 @@ struct MyUserInfo: Sendable {
     let name: String
 }
 
-final class MyClassUserInfo: Sendable {
-    let name: String
+final class MyClassUserInfo: @unchecked Sendable {
+    var name: String
     
     init(name: String) {
         self.name = name
