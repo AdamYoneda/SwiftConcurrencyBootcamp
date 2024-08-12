@@ -19,10 +19,17 @@ struct MyUserInfo: Sendable {
 }
 
 final class MyClassUserInfo: @unchecked Sendable {
-    var name: String
+    private var name: String
+    let lock = DispatchQueue(label: "com.MyApp.MyClassUserInfo")
     
     init(name: String) {
         self.name = name
+    }
+    
+    func updateName(name: String) {
+        lock.async {
+            self.name = name
+        }
     }
 }
 
