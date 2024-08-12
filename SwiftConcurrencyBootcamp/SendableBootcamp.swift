@@ -14,7 +14,7 @@ actor CurrentUserManager {
     }
 }
 
-struct MyUserInfo {
+struct MyUserInfo: Sendable {
     let name: String
 }
 
