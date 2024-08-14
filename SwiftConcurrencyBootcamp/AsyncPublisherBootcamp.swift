@@ -24,7 +24,17 @@ struct AsyncPublisherBootcamp: View {
     @StateObject private var viewModel = AsyncPublisherBootcampViewModel()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            VStack(content: {
+                ForEach(viewModel.dataArray, id: \.self) {
+                    Text($0)
+                        .font(.headline)
+                }
+            })
+        }
+        .task {
+            await viewModel.start()
+        }
     }
 }
 
