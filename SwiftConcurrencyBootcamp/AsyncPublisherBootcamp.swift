@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Combine
 
-actor AsyncPublisherDataManager {
+class AsyncPublisherDataManager {
     
     @Published var myData: [String] = []
     
@@ -26,6 +27,20 @@ class AsyncPublisherBootcampViewModel: ObservableObject {
     
     @Published var dataArray: [String] = []
     let manager = AsyncPublisherDataManager()
+    var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        addSubscribers()
+    }
+ 
+    private func addSubscribers() {
+        manager.$myData
+            .receive(on: DispatchQueue.main, options: nil)
+            .sink { dataArray in
+                self.dataArray = dataArray
+            }
+            .store(in: &cancellables)
+    }
     
     func start() async {
         await manager.addData()
