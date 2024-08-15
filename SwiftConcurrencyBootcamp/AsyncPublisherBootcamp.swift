@@ -25,7 +25,7 @@ class AsyncPublisherDataManager {
 
 class AsyncPublisherBootcampViewModel: ObservableObject {
     
-    @Published var dataArray: [String] = []
+    @MainActor @Published var dataArray: [String] = []
     let manager = AsyncPublisherDataManager()
     var cancellables = Set<AnyCancellable>()
     
@@ -34,12 +34,21 @@ class AsyncPublisherBootcampViewModel: ObservableObject {
     }
  
     private func addSubscribers() {
+        Task {
+            for await value in manager.$myData.values {
+                await MainActor.run {
+                    self.dataArray = value
+                }
+            }
+        }
+        /*
         manager.$myData
             .receive(on: DispatchQueue.main, options: nil)
             .sink { dataArray in
                 self.dataArray = dataArray
             }
             .store(in: &cancellables)
+        */
     }
     
     func start() async {
