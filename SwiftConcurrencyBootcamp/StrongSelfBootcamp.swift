@@ -7,9 +7,23 @@
 
 import SwiftUI
 
+final class StrongSelfDataService {
+    
+    func getData() async -> String {
+        return "updated data!"
+    }
+}
+
 final class StrongSelfBootcampViewModel: ObservableObject {
     
     @Published var data: String = "Some title!"
+    let dataService = StrongSelfDataService()
+    
+    func updateData() {
+        Task {
+            data = await dataService.getData()
+        }
+    }
     
 }
 
@@ -19,6 +33,9 @@ struct StrongSelfBootcamp: View {
     
     var body: some View {
         Text(viewModel.data)
+            .onAppear(perform: {
+                viewModel.updateData()
+            })
     }
 }
 
