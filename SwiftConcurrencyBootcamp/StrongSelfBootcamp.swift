@@ -26,6 +26,26 @@ final class StrongSelfBootcampViewModel: ObservableObject {
         }
     }
     
+    func updateData2() {
+        Task {
+            self.data = await dataService.getData()
+        }
+    }
+    
+    func updateData3() {
+        Task { [self] in
+            self.data = await dataService.getData()
+        }
+    }
+    
+    // 弱参照だとこのようになるが通常このようにしない
+    func updateData4() {
+        Task { [weak self] in
+            if let data = await self?.dataService.getData() {
+                self?.data = data
+            }
+        }
+    }
 }
 
 struct StrongSelfBootcamp: View {
