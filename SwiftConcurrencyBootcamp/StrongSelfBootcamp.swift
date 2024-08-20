@@ -59,6 +59,7 @@ final class StrongSelfBootcampViewModel: ObservableObject {
         }
     }
     
+    // we can manage the Task
     func updateData6() {
         let task1 = Task {
             self.data = await self.dataService.getData()
@@ -69,6 +70,16 @@ final class StrongSelfBootcampViewModel: ObservableObject {
             self.data = await self.dataService.getData()
         }
         myTasks.append(task2)
+    }
+    
+    // We purposely do not cancel tasks to keep strong reference
+    func updateData7() {
+        Task {
+            self.data = await self.dataService.getData()
+        }
+        Task.detached {
+            self.data = await self.dataService.getData()
+        }
     }
     
     func cancelTasks() {
