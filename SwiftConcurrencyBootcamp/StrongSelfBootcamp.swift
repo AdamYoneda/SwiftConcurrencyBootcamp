@@ -19,6 +19,7 @@ final class StrongSelfBootcampViewModel: ObservableObject {
     @Published var data: String = "Some title!"
     let dataService = StrongSelfDataService()
     private var someTask: Task<Void, Never>? = nil
+    private var myTasks: [Task<Void, Never>] = []
     
     /*
     // これは強参照を意味する
@@ -58,9 +59,24 @@ final class StrongSelfBootcampViewModel: ObservableObject {
         }
     }
     
+    func updateData6() {
+        let task1 = Task {
+            self.data = await self.dataService.getData()
+        }
+        myTasks.append(task1)
+        
+        let task2 = Task {
+            self.data = await self.dataService.getData()
+        }
+        myTasks.append(task2)
+    }
+    
     func cancelTasks() {
         someTask?.cancel()
         someTask = nil
+        
+        myTasks.forEach({ $0.cancel() })
+        myTasks = []
     }
 }
 
@@ -71,7 +87,7 @@ struct StrongSelfBootcamp: View {
     var body: some View {
         Text(viewModel.data)
             .onAppear(perform: {
-                viewModel.updateData5()
+                viewModel.updateData6()
             })
             .onDisappear(perform: {
                 viewModel.cancelTasks()
