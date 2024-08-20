@@ -19,6 +19,7 @@ final class StrongSelfBootcampViewModel: ObservableObject {
     @Published var data: String = "Some title!"
     let dataService = StrongSelfDataService()
     
+    // これは強参照を意味する
     func updateData() {
         Task {
             data = await dataService.getData()
