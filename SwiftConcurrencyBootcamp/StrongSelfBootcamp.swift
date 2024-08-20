@@ -18,7 +18,9 @@ final class StrongSelfBootcampViewModel: ObservableObject {
     
     @Published var data: String = "Some title!"
     let dataService = StrongSelfDataService()
+    private var someTask: Task<Void, Never>? = nil
     
+    /*
     // これは強参照を意味する
     func updateData() {
         Task {
@@ -46,6 +48,20 @@ final class StrongSelfBootcampViewModel: ObservableObject {
             }
         }
     }
+    */
+    
+    // We don't need to manage weak/strong
+    // we can manage the Task
+    func updateData5() {
+        someTask = Task {
+            self.data = await self.dataService.getData()
+        }
+    }
+    
+    func cancelTasks() {
+        someTask?.cancel()
+        someTask = nil
+    }
 }
 
 struct StrongSelfBootcamp: View {
@@ -55,7 +71,10 @@ struct StrongSelfBootcamp: View {
     var body: some View {
         Text(viewModel.data)
             .onAppear(perform: {
-                viewModel.updateData()
+                viewModel.updateData5()
+            })
+            .onDisappear(perform: {
+                viewModel.cancelTasks()
             })
     }
 }
