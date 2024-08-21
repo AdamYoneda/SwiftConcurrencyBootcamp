@@ -7,9 +7,38 @@
 
 import SwiftUI
 
+final class MyManagerClass {
+    func getData() async throws -> String {
+        return "Some Data!"
+    }
+}
+
+actor MyManagerActor {
+    func getData() async throws -> String {
+        return "Some Data!"
+    }
+}
+
+final class MVVMBootcampViewModel: ObservableObject {
+    
+    let managerClass = MyManagerClass()
+    let managerActor = MyManagerActor()
+    
+    func onCallToActionButtonPressed() {
+        Task {
+            
+        }
+    }
+}
+
 struct MVVMBootcamp: View {
+    
+    @StateObject private var viewModel = MVVMBootcampViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button("Click me!") {
+            viewModel.onCallToActionButtonPressed()
+        }
     }
 }
 
