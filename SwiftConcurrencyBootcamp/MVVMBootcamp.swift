@@ -19,15 +19,30 @@ actor MyManagerActor {
     }
 }
 
+@MainActor
 final class MVVMBootcampViewModel: ObservableObject {
     
     let managerClass = MyManagerClass()
     let managerActor = MyManagerActor()
     
+    @Published private(set) var myData: String = "Starting Text"
+    private var tasks: [Task<Void, Never>] = []
+    
     func onCallToActionButtonPressed() {
-        Task {
-            
+        let task = Task {
+            do {
+                //                myData = try await managerClass.getData()
+                myData = try await managerActor.getData()
+            } catch {
+                print(error)
+            }
         }
+        tasks.append(task)
+    }
+    
+    func cancelTasks() {
+        tasks.forEach({ $0.cancel() })
+        tasks = []
     }
 }
 
@@ -36,9 +51,14 @@ struct MVVMBootcamp: View {
     @StateObject private var viewModel = MVVMBootcampViewModel()
     
     var body: some View {
-        Button("Click me!") {
-            viewModel.onCallToActionButtonPressed()
-        }
+        VStack(content: {
+            Button(viewModel.myData) {
+                viewModel.onCallToActionButtonPressed()
+            }
+        })
+        .onDisappear(perform: {
+            viewModel.cancelTasks()
+        })
     }
 }
 
