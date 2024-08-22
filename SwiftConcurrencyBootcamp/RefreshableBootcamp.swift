@@ -35,7 +35,20 @@ struct RefreshableBootcamp: View {
     @StateObject private var viewModel = RefreshableBootcampViewModel()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ScrollView {
+                VStack(content: {
+                    ForEach(viewModel.items, id: \.self) { item in
+                        Text(item)
+                            .font(.headline)
+                    }
+                })
+            }
+            .navigationTitle("Refreshable")
+            .onAppear(perform: {
+                viewModel.loadData()
+            })
+        }
     }
 }
 
