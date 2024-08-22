@@ -10,6 +10,7 @@ import SwiftUI
 final class RefreshableDataService {
     
     func getData() async throws -> [String] {
+        try? await Task.sleep(nanoseconds: 3_000_000_000)
         return ["Apple", "Orange", "Banana"].shuffled()
     }
 }
@@ -19,13 +20,11 @@ final class RefreshableBootcampViewModel: ObservableObject {
     @Published private(set) var items: [String] = []
     let manager = RefreshableDataService()
     
-    func loadData() {
-        Task {
-            do {
-                items = try await manager.getData()
-            } catch {
-                print(error)
-            }
+    func loadData() async {
+        do {
+            items = try await manager.getData()
+        } catch {
+            print(error)
         }
     }
 }
@@ -44,9 +43,14 @@ struct RefreshableBootcamp: View {
                     }
                 })
             }
+            .refreshable {
+                await viewModel.loadData()
+            }
             .navigationTitle("Refreshable")
             .onAppear(perform: {
-                viewModel.loadData()
+                Task {
+                    await viewModel.loadData()
+                }
             })
         }
     }
