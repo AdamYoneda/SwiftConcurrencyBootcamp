@@ -54,7 +54,9 @@ struct SearchableBootcamp: View {
                     restaurantRow(restaurant: restaurant)
                 }
             })
+            .padding()
         }
+        .navigationTitle("Restaurants")
         .task {
             await viewModel.loadRestaurants()
         }
@@ -67,9 +69,14 @@ struct SearchableBootcamp: View {
             Text(restaurant.cuisine.rawValue.capitalized)
                 .font(.caption)
         })
+        .padding()
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.black.opacity(0.05))
     }
 }
 
 #Preview {
-    SearchableBootcamp()
+    NavigationStack {
+        SearchableBootcamp()
+    }
 }
