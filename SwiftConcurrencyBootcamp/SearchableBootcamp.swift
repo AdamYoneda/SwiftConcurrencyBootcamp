@@ -13,7 +13,7 @@ struct Restaurant: Identifiable, Hashable {
     let cuisine: CuisineOption
 }
 
-enum CuisineOption {
+enum CuisineOption: String {
     case american, italian, japanese
 }
 
@@ -48,10 +48,25 @@ struct SearchableBootcamp: View {
     @StateObject private var viewModel = SearchableBootcampViewModel()
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .task {
-                await viewModel.loadRestaurants()
-            }
+        ScrollView {
+            VStack(spacing: 20, content: {
+                ForEach(viewModel.allRestaurants) { restaurant in
+                    restaurantRow(restaurant: restaurant)
+                }
+            })
+        }
+        .task {
+            await viewModel.loadRestaurants()
+        }
+    }
+    
+    private func restaurantRow(restaurant: Restaurant) -> some View {
+        VStack(alignment: .leading, spacing: 10, content: {
+            Text(restaurant.title)
+                .font(.headline)
+            Text(restaurant.cuisine.rawValue.capitalized)
+                .font(.caption)
+        })
     }
 }
 
