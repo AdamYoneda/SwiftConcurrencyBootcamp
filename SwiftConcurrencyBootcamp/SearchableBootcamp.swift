@@ -32,6 +32,7 @@ final class RestaurantManager {
 @MainActor
 final class SearchableBootcampViewModel: ObservableObject {
     @Published private(set) var allRestaurants: [Restaurant] = []
+    @Published var searchText: String = ""
     let manager = RestaurantManager()
     
     func loadRestaurants() async {
@@ -56,6 +57,8 @@ struct SearchableBootcamp: View {
             })
             .padding()
         }
+        .searchable(text: $viewModel.searchText, placement: .automatic, prompt: Text("Search restaurants..."))
+        .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Restaurants")
         .task {
             await viewModel.loadRestaurants()
