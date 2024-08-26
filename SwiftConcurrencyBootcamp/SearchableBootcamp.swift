@@ -52,7 +52,19 @@ final class SearchableBootcampViewModel: ObservableObject {
     }
     
     private func filterRestaurants(searchText: String) {
+        // 検索ワードが0文字であるか判定
+        guard !searchText.isEmpty else {
+            filteredRestaurants = []
+            return
+        }
         
+        // Restaurantのtitleもしくはcusineに検索ワードが引っ掛かるか判定
+        let search = searchText.lowercased()
+        filteredRestaurants = allRestaurants.filter({ restaurant in
+            let titleContainSearch = restaurant.title.lowercased().contains(search)
+            let cusineContainSearch = restaurant.cuisine.rawValue.lowercased().contains(search)
+            return titleContainSearch || cusineContainSearch
+        })
     }
     
     func loadRestaurants() async {
