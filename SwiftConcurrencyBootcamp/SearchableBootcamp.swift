@@ -87,7 +87,7 @@ struct SearchableBootcamp: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20, content: {
-                ForEach(viewModel.allRestaurants) { restaurant in
+                ForEach(viewModel.isSearching ? viewModel.filteredRestaurants : viewModel.allRestaurants) { restaurant in
                     restaurantRow(restaurant: restaurant)
                 }
             })
