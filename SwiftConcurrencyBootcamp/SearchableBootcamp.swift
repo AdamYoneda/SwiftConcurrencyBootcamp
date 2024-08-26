@@ -38,6 +38,10 @@ final class SearchableBootcampViewModel: ObservableObject {
     let manager = RestaurantManager()
     private var cancellables = Set<AnyCancellable>()
     
+    var isSearching: Bool {
+        return !searchText.isEmpty
+    }
+    
     init() {
         addSubscribers()
     }
