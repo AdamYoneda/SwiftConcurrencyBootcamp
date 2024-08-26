@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct Restaurant: Identifiable, Hashable {
     let id: String
@@ -32,8 +33,27 @@ final class RestaurantManager {
 @MainActor
 final class SearchableBootcampViewModel: ObservableObject {
     @Published private(set) var allRestaurants: [Restaurant] = []
+    @Published private(set) var filteredRestaurants: [Restaurant] = []
     @Published var searchText: String = ""
     let manager = RestaurantManager()
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        addSubscribers()
+    }
+    
+    private func addSubscribers() {
+        $searchText
+            .debounce(for: 0.3, scheduler: DispatchQueue.main, options: nil)
+            .sink { [weak self] searchText in
+                self?.filterRestaurants(searchText: searchText)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func filterRestaurants(searchText: String) {
+        
+    }
     
     func loadRestaurants() async {
         do {
