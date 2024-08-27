@@ -45,6 +45,20 @@ final class SearchableBootcampViewModel: ObservableObject {
         return !searchText.isEmpty
     }
     
+    enum SearchScopeOption: Hashable {
+        case all
+        case cuisine(option: CuisineOption)
+        
+        var title: String {
+            switch self {
+            case .all:
+                return "All"
+            case .cuisine(option: let option):
+                return option.rawValue.capitalized
+            }
+        }
+    }
+    
     init() {
         addSubscribers()
     }
@@ -101,7 +115,11 @@ struct SearchableBootcamp: View {
             .padding()
         }
         .searchable(text: $viewModel.searchText, placement: .automatic, prompt: Text("Search restaurants..."))
-        .searchScopes(<#T##scope: Binding<Hashable>##Binding<Hashable>#>, scopes: <#T##() -> View#>)
+        .searchScopes($viewModel.searchScope, scopes: {
+            ForEach(viewModel.allSearchScopes, id: \.self) { scope in
+                Text(scope.title)
+            }
+        })
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Restaurants")
         .task {
