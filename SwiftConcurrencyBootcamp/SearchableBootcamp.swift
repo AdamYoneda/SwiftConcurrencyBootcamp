@@ -83,7 +83,7 @@ final class SearchableBootcampViewModel: ObservableObject {
         }
         
         // 1. SearchScopeでフィルター
-        var restaurantsInScope = switch currentSearchScope {
+        let restaurantsInScope = switch currentSearchScope {
         case .all:
             allRestaurants
         case .cuisine(let option):
