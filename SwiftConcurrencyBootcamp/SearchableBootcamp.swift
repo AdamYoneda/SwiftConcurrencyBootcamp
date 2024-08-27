@@ -133,6 +133,12 @@ struct SearchableBootcamp: View {
                     .tag(scope)
             }
         })
+        .searchSuggestions({
+            Text("Hello World!")
+            Text("Hello World!")
+            Text("Hello World!")
+            Text("Hello World!")
+        })
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Restaurants")
         .task {
