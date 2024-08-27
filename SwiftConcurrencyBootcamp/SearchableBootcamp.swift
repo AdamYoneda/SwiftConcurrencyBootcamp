@@ -118,6 +118,7 @@ struct SearchableBootcamp: View {
         .searchScopes($viewModel.searchScope, scopes: {
             ForEach(viewModel.allSearchScopes, id: \.self) { scope in
                 Text(scope.title)
+                    .tag(scope)
             }
         })
         .navigationBarTitleDisplayMode(.inline)
