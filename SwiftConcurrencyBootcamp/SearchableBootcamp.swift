@@ -94,6 +94,7 @@ struct SearchableBootcamp: View {
             .padding()
         }
         .searchable(text: $viewModel.searchText, placement: .automatic, prompt: Text("Search restaurants..."))
+        .searchScopes(<#T##scope: Binding<Hashable>##Binding<Hashable>#>, scopes: <#T##() -> View#>)
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Restaurants")
         .task {
