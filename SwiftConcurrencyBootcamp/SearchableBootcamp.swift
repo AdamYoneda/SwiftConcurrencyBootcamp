@@ -65,23 +65,35 @@ final class SearchableBootcampViewModel: ObservableObject {
     
     private func addSubscribers() {
         $searchText
+            .combineLatest($searchScope)
             .debounce(for: 0.3, scheduler: DispatchQueue.main, options: nil)
-            .sink { [weak self] searchText in
-                self?.filterRestaurants(searchText: searchText)
+            .sink { [weak self] (searchText, searchScope) in
+                self?.filterRestaurants(searchText: searchText, currentSearchScope: searchScope)
             }
             .store(in: &cancellables)
     }
     
-    private func filterRestaurants(searchText: String) {
+    private func filterRestaurants(searchText: String, currentSearchScope: SearchScopeOption) {
         // 検索ワードが0文字であるか判定
         guard !searchText.isEmpty else {
+            // defaultに設定
             filteredRestaurants = []
+            searchScope = .all
             return
         }
         
+        // 1. SearchScopeでフィルター
+        var restaurantsInScope = switch currentSearchScope {
+        case .all:
+            allRestaurants
+        case .cuisine(let option):
+            allRestaurants.filter({ return $0.cuisine == option })
+        }
+        
+        // 2. SearchTextでフィルター
         // Restaurantのtitleもしくはcusineに検索ワードが引っ掛かるか判定
         let search = searchText.lowercased()
-        filteredRestaurants = allRestaurants.filter({ restaurant in
+        filteredRestaurants = restaurantsInScope.filter({ restaurant in
             let titleContainSearch = restaurant.title.lowercased().contains(search)
             let cusineContainSearch = restaurant.cuisine.rawValue.lowercased().contains(search)
             return titleContainSearch || cusineContainSearch
